@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Bottle extends Model {
+  class Order extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   };
-  Bottle.init({
+  Order.init({
     id:  { type: Sequelize.STRING, primaryKey: true},
     orderNumber: { type: Sequelize.INTEGER, autoIncrement: true, allowNull: false },
     responsiblePerson: sequelize.STRING,
@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     healthCareDistrict: DataTypes.ENUM('HYKS','KYS','OYS','TAYS','TYKS')
   }, {
     sequelize,
-    //modelName: 'Bottle',
+    //modelName: 'Order',
   });
-  return Bottle;
+  return Order;
 };

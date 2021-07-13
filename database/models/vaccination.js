@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.channelId = this.belongsTo(models.Bottle, {
+      this.channelId = this.belongsTo(models.Order, {
         foreignKey: 'id',
         onDelete: 'CASCADE'
       });
@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       sourceBottle: {
         type: Sequelize.STRING,
         references:{
-          model: "bottle",
+          model: "order",
           key: "id",
           onDelete: 'CASCADE',
         }

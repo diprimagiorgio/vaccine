@@ -11,17 +11,17 @@ module.exports = {
     //------------------------------------------------- for bootle --------------------------------------------------//
     liner = new lineByLine(path.join(__dirname, 'resources','Antiqua.source'));
     while (line = liner.next()) {
-      await queryInterface.bulkInsert('bottle',[JSON.parse(line.toString())]);
+      await queryInterface.bulkInsert('order',[JSON.parse(line.toString())]);
     }
 
     liner = new lineByLine(path.join(__dirname, 'resources','SolarBuddhica.source'));
     while (line = liner.next()) {
-      await queryInterface.bulkInsert('bottle',[JSON.parse(line.toString())]);
+      await queryInterface.bulkInsert('order',[JSON.parse(line.toString())]);
     }
 
     liner = new lineByLine(path.join(__dirname, 'resources','Zerpfy.source'));
     while (line = liner.next()) {
-      await queryInterface.bulkInsert('bottle',[JSON.parse(line.toString())]);
+      await queryInterface.bulkInsert('order',[JSON.parse(line.toString())]);
     }
     
     //----------------------------------------------- for vaccination -----------------------------------------------//
@@ -35,6 +35,6 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
      await queryInterface.bulkDelete('vaccination', null, {});
-     await queryInterface.bulkDelete('bottle', null, {});
+     await queryInterface.bulkDelete('order', null, {});
   }
 };
