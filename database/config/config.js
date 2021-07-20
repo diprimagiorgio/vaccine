@@ -1,6 +1,9 @@
 require('dotenv').config()
-// TODO:I have to use enviromental variable 
+
 module.exports = {
+  define: {
+    timestamps: false
+  },
   development: {
     url: process.env.DEV_DATABASE_URL,
     dialect: 'postgres',
@@ -10,7 +13,9 @@ module.exports = {
     dialect: 'postgres',
   },
   production: {
-    url: '',
+    url: process.env.DATABASE_URL,
     dialect: 'postgres',
   },
 }
+// I want to add a column doses left and every time I do an insert a trugger will update the value doses_left -= 1
+// And I will inssert a check doses_left >= 0 all this step have to be in a transactino with a rollback in case the chack fails

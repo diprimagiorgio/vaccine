@@ -18,18 +18,18 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Vaccination.init({
-    vaccination_id: { type: Sequelize.STRING },
+    vaccination_id: { type: DataTypes.STRING },
       gender: { type: DataTypes.ENUM('male','female','nonbinary')},
       sourceBottle: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         references:{
-          model: "order",
+          model: "Orders",
           key: "id",
           onDelete: 'CASCADE',
         }
       },
       vaccinationDate: {
-        type: Sequelize.DATEONLY
+        type: DataTypes.DATEONLY
       }
   }, {
     sequelize,

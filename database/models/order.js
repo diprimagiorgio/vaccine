@@ -14,16 +14,17 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Order.init({
-    id:  { type: Sequelize.STRING, primaryKey: true},
-    orderNumber: { type: Sequelize.INTEGER, autoIncrement: true, allowNull: false },
-    responsiblePerson: sequelize.STRING,
-    injections: integer,
-    arrived: { type: Sequelize.DATEONLY, defaultValue: Sequelize.NOW },// ?? OR DATE TIME
+    id:  { type: DataTypes.STRING, primaryKey: true},
+    orderNumber: { type: DataTypes.INTEGER, autoIncrement: true, allowNull: false },//unique??
+    responsiblePerson: DataTypes.STRING,
+    injections: DataTypes.INTEGER,
+    arrived: { type: DataTypes.DATEONLY },// ?? OR DATE TIME
     vaccine: DataTypes.ENUM('Zerpfy','Antiqua','SolarBuddhica'),
-    healthCareDistrict: DataTypes.ENUM('HYKS','KYS','OYS','TAYS','TYKS')
+    healthCareDistrict: DataTypes.ENUM('HYKS','KYS','OYS','TAYS','TYKS'),
+    injections_left: DataTypes.INTEGER
   }, {
     sequelize,
-    //modelName: 'Order',
+    //modelName: 'order',
   });
   return Order;
 };
