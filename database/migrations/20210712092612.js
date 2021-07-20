@@ -28,22 +28,23 @@ module.exports = {
       healthCareDistrict: {
         type: Sequelize.ENUM('HYKS','KYS','OYS','TAYS','TYKS')
       },
-      injections_left: {
+      injections_used: {
         type: Sequelize.INTEGER,
         defaultValue: 0,
         allowNull: false
 
       }
-    }).then(() => queryInterface.addConstraint('Orders', {
-        fields: ['injections_left'],
+    }).then(() => 
+      queryInterface.addConstraint('Orders', {
+        fields: ['injections_used'],
         type: 'check',
         where: {
-          injections_left: {
-                [Sequelize.Op.gte]: 0
-            }
+        injections_used:{
+          [Sequelize.Op.lte] : { [Sequelize.Op.col]: 'Orders.injections' }
         }
-    }));
-
+        }
+      })
+    );
     await queryInterface.createTable('Vaccinations', {
       vaccination_id: {
         allowNull: false,
@@ -67,14 +68,15 @@ module.exports = {
       }
     });
 
+    //TODO this one should be a transaction because we have to block injection used in between the select and the update
     await queryInterface.createFunction(
-      'update_injections_left_func',
+      'update_injections_used_func',
       [],
       'trigger',
       'plpgsql',
       `
       BEGIN
-      UPDATE "Orders" SET injections_left = injections_left - 1 WHERE "Orders".id = NEW."sourceBottle";   
+      UPDATE "Orders" SET injections_used = injections_used + 1 WHERE "Orders".id = NEW."sourceBottle";   
       RETURN NEW; 
       END;
       `,
@@ -87,18 +89,18 @@ module.exports = {
       
     ).then(
       () => queryInterface.sequelize.query(`
-      CREATE TRIGGER update_injections_left
+      CREATE TRIGGER update_injections_used
         AFTER INSERT
         ON public."Vaccinations"
         FOR EACH ROW
-        EXECUTE FUNCTION public.update_injections_left_func();
+        EXECUTE FUNCTION public.update_injections_used_func();
       `)
     );
   
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropAllTables();
-    await queryInterface.dropFunction("update_injections_left_func",[]);
+    await queryInterface.dropFunction("update_injections_used_func",[]);
   }
 };
 //TODO The default value should be the save of the doses

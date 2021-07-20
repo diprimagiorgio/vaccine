@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     arrived: { type: DataTypes.DATEONLY },// ?? OR DATE TIME
     vaccine: DataTypes.ENUM('Zerpfy','Antiqua','SolarBuddhica'),
     healthCareDistrict: DataTypes.ENUM('HYKS','KYS','OYS','TAYS','TYKS'),
-    injections_left: DataTypes.INTEGER
+    injections_used: { type: DataTypes.INTEGER, allowNull: false }
   }, {
     sequelize,
     //modelName: 'order',
