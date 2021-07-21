@@ -69,8 +69,7 @@ module.exports = {
     });
 
     //TODO this one should be a transaction because we have to block injection used in between the select and the update
-    await queryInterface.createFunction(
-      'update_injections_used_func',
+    await queryInterface.createFunction('update_injections_used_func',
       [],
       'trigger',
       'plpgsql',
@@ -100,7 +99,8 @@ module.exports = {
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropAllTables();
-    await queryInterface.dropFunction("update_injections_used_func",[]);
+    queryInterface.dropFunction("update_injections_used_func",[]).then( () => console.log("Removed the function update_injections_used_func" ))
+    .catch((err) => console.log(err))
   }
 };
 //TODO The default value should be the save of the doses
