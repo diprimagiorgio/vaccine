@@ -8,7 +8,7 @@
     "seed": "npx sequelize-cli db:seed:all",
     "migrate:reset": "npx sequelize-cli db:migrate:undo:all && npm run migrate",
     "test": "cross-env NODE_ENV=test jest --testTimeout=10000",
-    "pretest": "cross-env NODE_ENV=test npm run migrate:reset"
+    "_pretest": "cross-env NODE_ENV=test npm run migrate:reset && cross-env NODE_ENV=test npm run seed"
   },
   "dependencies": {
     "cookie-parser": "^1.4.5",
