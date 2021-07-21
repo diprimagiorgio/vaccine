@@ -1,6 +1,6 @@
 var express = require('express');
 const models  = require('../database/models');
-var cors = require('../routes/cors')
+
 var router = express.Router();
 // TODO avoid more reservation than doses for the same bottle
 
