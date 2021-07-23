@@ -19,7 +19,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       arrived: {
-        type: Sequelize.DATEONLY,
+        type: Sequelize.DATE,
         defaultValue: Sequelize.NOW // ?? OR DATE TIME
       },
       vaccine: {
@@ -63,7 +63,7 @@ module.exports = {
         }
       },
       vaccinationDate: {
-        type: Sequelize.DATEONLY,
+        type: Sequelize.DATE,
         defaultValue: Sequelize.NOW
       }
     });

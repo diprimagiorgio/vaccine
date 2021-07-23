@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     orderNumber: { type: DataTypes.INTEGER, autoIncrement: true, allowNull: false },//unique??
     responsiblePerson: DataTypes.STRING,
     injections: DataTypes.INTEGER,
-    arrived: { type: DataTypes.DATEONLY },// ?? OR DATE TIME
+    arrived: { type: DataTypes.DATE },// ?? OR DATE TIME
     vaccine: DataTypes.ENUM('Zerpfy','Antiqua','SolarBuddhica'),
     healthCareDistrict: DataTypes.ENUM('HYKS','KYS','OYS','TAYS','TYKS'),
     injections_used: { type: DataTypes.INTEGER, allowNull: false }

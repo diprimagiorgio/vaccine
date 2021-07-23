@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
         }
       },
       vaccinationDate: {
-        type: DataTypes.DATEONLY
+        type: DataTypes.DATE
       }
   }, {
     sequelize,
