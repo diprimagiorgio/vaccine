@@ -47,7 +47,7 @@ router.get("/expired",( req, res, next) => {
   models.Order.count({
       where: {
         arrived: {
-          [Op.lte] : moment(req.query.date).subtract(daysbeforeExpiring, 'days').toDate()
+          [Op.lt] : moment.utc(req.query.date,moment.ISO_8601).subtract(daysbeforeExpiring, 'days').toDate()
         }
       }
     })
