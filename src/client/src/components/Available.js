@@ -26,8 +26,11 @@ export class Available extends Component{
         let date = input_date.utc().format();
 
         // remove the svg printed before
-        // var elem = document.getElementById("expiredChar");
-        // elem.removeChild(elem.childNodes[0]);
+        try {
+            var elem = document.getElementById("expiredChar");
+            elem.removeChild(elem.childNodes[0]);
+        } catch (error) {
+        }
         
         draw("dose/expired10dayssplitted?date="+date);
         Axios.get(baseUrl + "dose/available?date="+date)
