@@ -7,6 +7,7 @@ import Datetime from 'react-datetime';
 import "react-datetime/css/react-datetime.css";
 import Axios from "axios";
 import {baseUrl} from '../shared/baseUrl';
+import draw from './helperBarCharExpired'
 
 
 export class Available extends Component{
@@ -23,6 +24,12 @@ export class Available extends Component{
   
     handleDate(input_date){
         let date = input_date.utc().format();
+
+        // remove the svg printed before
+        // var elem = document.getElementById("expiredChar");
+        // elem.removeChild(elem.childNodes[0]);
+        
+        draw("dose/expired10dayssplitted?date="+date);
         Axios.get(baseUrl + "dose/available?date="+date)
         .then((response) => {
           this.setState({dosesAvailable : response.data.result})
@@ -30,7 +37,7 @@ export class Available extends Component{
         .catch((err) => {
           console.log(err);
         });
-        Axios.get(baseUrl + "dose/expired?date="+date)
+        Axios.get(baseUrl + "dose/expired10days?date="+date)
         .then((response) => {
           this.setState({doses10Days : response.data.result})
         })
@@ -65,6 +72,8 @@ export class Available extends Component{
                         <Row className='justify-content-center'>Vaccines are going to expire in the next 10 days:{this.state.doses10Days}</Row>
                     </Col>
                 </Row>
+                <div id="expiredChar"></div>
+
             </Container>
         );
     }
