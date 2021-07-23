@@ -113,23 +113,65 @@ router.get("/available",( req, res, next) => {
     });
   });
 //-------------------------------------- Get number of vaccines are going to expire in the next 10, from the given day
+async function expiredBetween(next, first_date, last_date){
+  return new Promise(( resolve) => {
+    expired(next, first_date)
+    .then( result => {
+      let doses_expired = result;
+      expired(next, last_date )
+      .then( result => {
+        resolve(result - doses_expired);
+      }, (err) => next(err));
+    },(err) => next(err))
+    .catch((err) => next(err));
+  });
+}
+
 router.get("/expired10days",( req, res, next) => {
     // check the input
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
-    expired(next, req.query.date)
-    .then( result => {
-      let doses_expired = result;
-      expired(next, moment(req.query.date).add(10, 'days') )
-      .then( result => {
-        res.json( {"result": result - doses_expired} );
-      }, (err) => next(err));
-    },(err) => next(err))
-    .catch((err) => next(err));
-
-
-    
+    let last_date = moment.utc(req.query.date ,moment.ISO_8601).add(10, 'days');
+    expiredBetween(next, req.query.date, last_date)
+    .then( result => res.json({"result": result}) ,(err) => next(err) )
+    .catch((err) => next(err) );
   });
+//------------------------------------- Get number of vaccine are going to expire in the next 10 days, splitted per day and producer
+// find number of doses expired in one day between date+i day and the previuose one 
+function expired1Day(next, date, i) {
+  return new Promise((resolve) => {
+    let first_day = moment.utc(date, moment.ISO_8601).add(i -1, 'days');
+    let last_day = moment.utc(date, moment.ISO_8601).add(i, 'days');
+    expiredBetween(next, first_day, last_day)
+    .then( result => {
+      jsonObj = {};
+      jsonObj["date"] = last_day;
+      jsonObj["value"] = result;
+      resolve(jsonObj);
+    },(err) => next(err) )
+    .catch((err) => next(err) )
+  });
+}
+
+router.get("/expired10dayssplitted",( req, res, next) => {
+  // check the input
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'application/json');
+
+  const promises = [];
+    
+    for (let i = 0; i < 10; ++i) {
+        promises.push(expired1Day(next, req.query.date, i));
+    }
+    
+    Promise.all(promises)
+        .then((results) => {
+            console.log("All done", results);
+            res.json({"result" : results})
+        })
+        .catch((err) => next(err) );
 
 
+  
+});
 module.exports = router;
