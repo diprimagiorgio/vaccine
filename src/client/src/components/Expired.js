@@ -7,6 +7,8 @@ import Datetime from 'react-datetime';
 import "react-datetime/css/react-datetime.css";
 import Axios from "axios";
 import {baseUrl} from '../shared/baseUrl';
+import moment from 'moment';
+
 
 
 export class Expired extends Component{
@@ -14,15 +16,18 @@ export class Expired extends Component{
         super(props);
         this.state = {
             dosesExpired : 0,
-            bottlesExpired : 0
+            bottlesExpired : 0,
+            initialValue : "04/13/2021 12:00 AM"
+
         };
         this.handleDate = this.handleDate.bind(this);
     }
-    // Should I use a button ??
-    
-  
-    handleDate(input_date){
-        let date = input_date.utc().format();
+    componentDidMount(){
+        let date = moment(this.state.initialValue).utc().format();
+        this.getOrderExpired(date);
+        this.getDoseExpired(date);
+    }
+    getOrderExpired(date){
         Axios.get(baseUrl + "order/expired?date="+date)
         .then((response) => {
           this.setState({bottlesExpired : response.data.result})
@@ -30,6 +35,8 @@ export class Expired extends Component{
         .catch((err) => {
           console.log(err);
         });
+    }
+    getDoseExpired(date){
         Axios.get(baseUrl + "dose/expired?date="+date)
         .then((response) => {
           this.setState({dosesExpired : response.data.result})
@@ -37,6 +44,11 @@ export class Expired extends Component{
         .catch((err) => {
           console.log(err);
         });
+    }
+    handleDate(input_date){
+        let date = input_date.utc().format();
+        this.getOrderExpired(date);
+        this.getDoseExpired(date);
     };
   
     render(){
@@ -53,10 +65,10 @@ export class Expired extends Component{
                     </Col>
                     <Col className="col-5 mr-5 d-flex flex-column">
                         <Row >
-                        Select a day and check how many vaccine and orders has expired in the given day?
+                        Select a day and check how many vaccine and orders has expired until the given day?
                         </Row>
                         <Row className="justify-content-center mt-3">
-                            <Datetime className = 'col-6' onChange={this.handleDate} />
+                            <Datetime className = 'col-6' initialValue={this.state.initialValue} onChange={this.handleDate} />
                             {/* <Button className='col-2'variant="secondary" onClick={this.check()}>Check</Button> */}
                         </Row>
                     </Col>
@@ -65,6 +77,7 @@ export class Expired extends Component{
                         <Row className='justify-content-center'>Bottles expired:{this.state.bottlesExpired}</Row>
                     </Col>
                 </Row>
+
             </Container>
         );
     }
