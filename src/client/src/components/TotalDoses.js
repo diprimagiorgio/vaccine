@@ -30,7 +30,7 @@ export class TotalDoses extends Component{
     }
     render(){
         return(
-            <Container>
+            <Container className="mt-5">
                 <Row>
                     <Col>
                         <img src={meds} alt="meds" class="pl-2 pr-5"/>

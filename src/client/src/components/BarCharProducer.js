@@ -50,7 +50,7 @@ export class BarCharProducer extends Component{
         this.setState(prevState => ({
           doses: !prevState.doses
         }));
-        console.log(this.state.doses);
+        
         // remove the svg printed before
         var elem = document.getElementById("totalPerProducer");
         elem.removeChild(elem.childNodes[0]);

@@ -42,15 +42,47 @@ const draw = (url) =>{
          .attr("transform", "translate(-10,0)rotate(-45)")
          .style("text-anchor", "end");
             
-         //max plus 30%
-         let max = parseInt(d3.max(data, d => d.value))  + (parseInt(d3.max(data, d => d.value)) * 0.3) ;
          // Add Y axis
          var y = d3.scaleLinear()
-         .domain([0, max])
+         .domain([0, d3.max(data, d => d.value)])
          .range([ height, 0]);
          svg.append("g")
          .call(d3.axisLeft(y));
  
+
+
+        // // ----------------
+        // // Create a tooltip
+        // // ----------------
+        // const tooltip = d3.select("#expiredChar")
+        // .append("div")
+        // .style("opacity", 0)
+        // .attr("class", "tooltip")
+        // .style("background-color", "white")
+        // .style("border", "solid")
+        // .style("border-width", "1px")
+        // .style("border-radius", "5px")
+        // .style("padding", "10px")
+
+        // // Three function that change the tooltip when user hover / move / leave a cell
+        // const mouseover = function(event, d) {
+        // const subgroupValue = 44;
+        // tooltip
+        //     .html("Value: " + subgroupValue)
+        //     .style("opacity", 1)
+            
+        // }
+        // const mousemove = function(event, d) {
+        // tooltip.style("transform","translateY(-55%)")  
+        //         .style("left",(event.x)/2+"px")
+        //         .style("top",(event.y)/2-30+"px")
+        // }
+        // const mouseleave = function(event, d) {
+        // tooltip
+        //     .style("opacity", 0)
+        // }
+
+
          // Bars
          svg.selectAll("mybar")
          .data(data)
@@ -61,6 +93,9 @@ const draw = (url) =>{
          .attr("width", x.bandwidth())
          .attr("height", d => height - y(d.value) )
          .attr("fill", "#437C90")
+        //  .on("mouseover", mouseover)
+        //  .on("mousemove", mousemove)
+        //  .on("mouseleave", mouseleave)
  
     })
     .catch((err) => {
