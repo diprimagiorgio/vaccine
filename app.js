@@ -25,7 +25,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cors());
-app.use('/', indexRouter);
+
 app.use('/vaccination/', vaccinationRouter);
 app.use('/order/', orderRouter);
 app.use('/dose/', doseRouter);
@@ -49,7 +49,8 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  console.log(err);
+  res.send("error");
 });
 
 module.exports = app;
