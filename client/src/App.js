@@ -1,6 +1,5 @@
 
 import { HeaderBar } from './components/Navbar';
-import { LastUpdate } from './components/LastUpdate';
 import { TotalDoses } from './components/TotalDoses';
 import { BarCharProducer } from './components/BarCharProducer'
 import { Expired } from './components/Expired'
@@ -17,7 +16,6 @@ class App extends Component {
     return (
       <div className="App">
         < HeaderBar />
-        {/* < LastUpdate /> */}
         < TotalDoses />
         < BarCharProducer />
         < Expired />
