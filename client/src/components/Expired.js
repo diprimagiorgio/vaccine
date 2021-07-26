@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "../App.css";
 import { Container, Col, Row } from "react-bootstrap";
 import React, { Component } from 'react';
-import expired from '../expired.svg'
+import expired from '../img/expired.svg'
 import Datetime from 'react-datetime';
 import "react-datetime/css/react-datetime.css";
 import Axios from "axios";

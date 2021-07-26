@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "../App.css";
 import { Container, Col, Row } from "react-bootstrap";
 import React, { Component } from 'react';
-import expired from '../stock.png'
+import expired from '../img/stock.png'
 import Datetime from 'react-datetime';
 import "react-datetime/css/react-datetime.css";
 import Axios from "axios";

@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import meds from '../meds.png'
+import meds from '../img/meds.png'
 import "../App.css";
 import Axios from "axios";
 import {baseUrl} from '../shared/baseUrl';
