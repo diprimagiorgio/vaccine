@@ -8,7 +8,6 @@ const router = express.Router();
 router.use(express.json());
 
 //-------------------------------------- Get total of the doses recived
-//router.get("/totalDoses", cors.corsWithOptions,( req, res, next) => {
     router.get("/total",( req, res, next) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
@@ -72,7 +71,7 @@ async function expired(next, date){
 }
 router.get("/expired",( req, res, next) => {
 
-    // check the input
+    //TODO check the input
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     expired(next, req.query.date)
@@ -84,7 +83,8 @@ router.get("/expired",( req, res, next) => {
   });
 //-------------------------------------- Get number of vaccine available for the given day
 router.get("/available",( req, res, next) => {
-    // check the input
+    //TODO check the input
+
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     models.Order.sum('injections_used', {

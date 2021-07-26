@@ -20,7 +20,7 @@ module.exports = {
       },
       arrived: {
         type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW // ?? OR DATE TIME
+        defaultValue: Sequelize.NOW
       },
       vaccine: {
         type: Sequelize.ENUM('Zerpfy','Antiqua','SolarBuddhica')
@@ -103,4 +103,3 @@ module.exports = {
     .catch((err) => console.log(err))
   }
 };
-//TODO The default value should be the save of the doses

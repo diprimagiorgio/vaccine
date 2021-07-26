@@ -69,7 +69,6 @@ export class Expired extends Component{
                         </Row>
                         <Row className="justify-content-center mt-3">
                             <Datetime className = 'col-6' initialValue={this.state.initialValue} onChange={this.handleDate} />
-                            {/* <Button className='col-2'variant="secondary" onClick={this.check()}>Check</Button> */}
                         </Row>
                     </Col>
                     <Col className='d-flex flex-column'>

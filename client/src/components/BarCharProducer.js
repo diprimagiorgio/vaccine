@@ -89,4 +89,3 @@ export class BarCharProducer extends Component{
         );
     }
 };
-// I'd like to see in the last 12 month how many of each vaccine bar one on top of the other

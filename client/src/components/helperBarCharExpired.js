@@ -8,7 +8,6 @@ const draw = (url) =>{
     var margin = {top: 30, right: 30, bottom: 70, left: 60},
     width = 460 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
-    // remove the prieviouse one
     
     // append the svg object to the body of the page
     var svg = d3.select("#expiredChar")
@@ -25,9 +24,6 @@ const draw = (url) =>{
     .then((response) => {
         let data = response.data.result;
         
-        // sort data
-        //data.sort( (b,a) => a.value - b.value);
-
         // X axis
         var x = d3.scaleBand()
          .range([ 0, width ])
@@ -50,39 +46,6 @@ const draw = (url) =>{
          .call(d3.axisLeft(y));
  
 
-
-        // // ----------------
-        // // Create a tooltip
-        // // ----------------
-        // const tooltip = d3.select("#expiredChar")
-        // .append("div")
-        // .style("opacity", 0)
-        // .attr("class", "tooltip")
-        // .style("background-color", "white")
-        // .style("border", "solid")
-        // .style("border-width", "1px")
-        // .style("border-radius", "5px")
-        // .style("padding", "10px")
-
-        // // Three function that change the tooltip when user hover / move / leave a cell
-        // const mouseover = function(event, d) {
-        // const subgroupValue = 44;
-        // tooltip
-        //     .html("Value: " + subgroupValue)
-        //     .style("opacity", 1)
-            
-        // }
-        // const mousemove = function(event, d) {
-        // tooltip.style("transform","translateY(-55%)")  
-        //         .style("left",(event.x)/2+"px")
-        //         .style("top",(event.y)/2-30+"px")
-        // }
-        // const mouseleave = function(event, d) {
-        // tooltip
-        //     .style("opacity", 0)
-        // }
-
-
          // Bars
          svg.selectAll("mybar")
          .data(data)
@@ -93,9 +56,6 @@ const draw = (url) =>{
          .attr("width", x.bandwidth())
          .attr("height", d => height - y(d.value) )
          .attr("fill", "#437C90")
-        //  .on("mouseover", mouseover)
-        //  .on("mousemove", mousemove)
-        //  .on("mouseleave", mouseleave)
  
     })
     .catch((err) => {

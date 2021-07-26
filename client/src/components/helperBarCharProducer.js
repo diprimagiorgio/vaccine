@@ -8,7 +8,6 @@ const draw = (url) =>{
     var margin = {top: 30, right: 30, bottom: 70, left: 60},
     width = 460 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
-    // remove the prieviouse one
     
     // append the svg object to the body of the page
     var svg = d3.select("#totalPerProducer")
@@ -17,9 +16,10 @@ const draw = (url) =>{
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
     .attr("transform",
-        "translate(" + margin.left + "," + margin.top + ")");
-
-        svg.selectAll("*").remove();
+    "translate(" + margin.left + "," + margin.top + ")");
+    
+    // remove the prieviouse one
+    svg.selectAll("*").remove();
     //Get data
     Axios.get(baseUrl + url)
     .then((response) => {

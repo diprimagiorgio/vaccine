@@ -9,8 +9,7 @@ import Axios from "axios";
 import {baseUrl} from '../shared/baseUrl';
 import draw from './helperBarCharExpired'
 import moment from 'moment';
-//TODO fix problem with 0 
-// leave the calendar alwas open
+// TODO fix problem with 0, the bar chart should have no rectangles
 export class Available extends Component{
     constructor(props){
         super(props);

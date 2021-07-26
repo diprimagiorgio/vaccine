@@ -10,7 +10,6 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
       this.channelId = this.belongsTo(models.Order, {
         foreignKey: 'id',
         onDelete: 'CASCADE'
@@ -33,7 +32,6 @@ module.exports = (sequelize, DataTypes) => {
       }
   }, {
     sequelize,
-    //modelName: 'vaccination',
   });
   return Vaccination;
 };
