@@ -1,4 +1,4 @@
-[![Node.js CI](https://github.com/diprimagiorgio/vaccine-exercise-2021/actions/workflows/node.js.yml/badge.svg)](https://github.com/diprimagiorgio/vaccine-exercise-2021/actions/workflows/node.js.yml)
+[![Azure App Service - vaccine-solita(Production), Build and deploy NodeJS app](https://github.com/diprimagiorgio/vaccine-exercise-2021/actions/workflows/main_vaccine-solita.yml/badge.svg)](https://github.com/diprimagiorgio/vaccine-exercise-2021/actions/workflows/main_vaccine-solita.yml)
 
 # Vaccine-exercise-2021
 
@@ -84,4 +84,4 @@ $ npm run start
 
 ## CI/CD
 
-I have used github action to implement continuous integration (CI) and I can automate the workflow to deploy Azure Web Apps. Every time I push my code, I test the server side with jest by checking the database creation and the seeding on a test db. After that I check if the result from the API matches the [result published](https://github.com/solita/vaccine-exercise-2021#some-numbers-to-help-you) by solita, if everything works fine the result is deploy and the new version is accessible [here](https://vaccine-solita.azurewebsites.net/)
+I have used github action to implement continuous integration (CI) and I have automated the workflow to deploy Azure Web Apps. Every time I push my code, I test the server side with jest by checking the database creation and the seeding on a test db. After that I check if the result from the API matches the [result published](https://github.com/solita/vaccine-exercise-2021#some-numbers-to-help-you) by solita, if everything works fine the result is deploy and the new version is accessible [here](https://vaccine-solita.azurewebsites.net/)
