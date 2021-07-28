@@ -65,7 +65,7 @@ export class Expired extends Component{
                     </Col>
                     <Col className="col-5 mr-5 d-flex flex-column">
                         <Row >
-                        Select a day and check how many vaccine and orders has expired until the given day?
+                        Select a day and check how many vaccines and orders have expired until the given day?
                         </Row>
                         <Row className="justify-content-center mt-3">
                             <Datetime className = 'col-6' initialValue={this.state.initialValue} onChange={this.handleDate} />
