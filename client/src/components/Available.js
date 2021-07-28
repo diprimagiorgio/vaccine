@@ -72,7 +72,6 @@ export class Available extends Component{
                         </Row>
                         <Row className="justify-content-center mt-3">
                             <Datetime initialValue={this.state.initialValue} onChange={this.handleDate} />
-                            {/* <Button className='col-2'variant="secondary" onClick={this.check()}>Check</Button> */}
                         </Row>
                     </Col>
                     <Col className="col-5 mr-5 d-flex flex-column">
