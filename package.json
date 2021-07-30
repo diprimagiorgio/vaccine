@@ -8,7 +8,7 @@
     "seed": "npx sequelize-cli db:seed:all",
     "migrate:reset": "npx sequelize-cli db:migrate:undo:all && npm run migrate",
     "test": "cross-env NODE_ENV=test jest --testTimeout=20000",
-    "_pretest": "cross-env NODE_ENV=test npm run migrate:reset && cross-env NODE_ENV=test npm run seed",
+    "pretest": "cross-env NODE_ENV=test npm run migrate:reset && cross-env NODE_ENV=test npm run seed",
     "build": "cd client && yarn install && yarn build"
   },
   "dependencies": {
